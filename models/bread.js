@@ -22,4 +22,4 @@ module.exports = [
 ];
 
 //the module.exports is doing the same thing that was done with the breads express.Router()
-//
+// its just done with an array of objects
