@@ -14,7 +14,7 @@ function Index({ title }) {
                         <li key={index}>
                             {/* prettier-ignore*/ }
                             <a href={`/breads/${index}`}>
-                             {bread.index}
+                             {bread.name}
                           </a>
                         </li>
                     );
