@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
-app.set("views", __dirname, "/views");
+app.set("views", __dirname, "/views"); //telling the program where to look for the views
 app.set("view engine", "jsx"); //setting what is being used to make the view
 app.engine("jsx", require("express-react-views").createEngine());
 

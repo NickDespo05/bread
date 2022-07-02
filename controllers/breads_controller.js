@@ -4,7 +4,10 @@ const bread = require("../models/bread"); //the require here does the same thing
 const breads = express.Router();
 
 breads.get("/", (req, res) => {
-    res.send(bread);
+    res.render("./views/index", {
+        bread: bread,
+    }); //tells us to render the file with the view we give it
+    // res.send(bread);
 });
 
 breads.get("/:arrayIndex", (req, res) => {

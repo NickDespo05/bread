@@ -1,4 +1,4 @@
-const react = require("react");
+const React = require("react");
 
 function Default(html) {
     return (
@@ -6,11 +6,14 @@ function Default(html) {
             <head>
                 <title>Default</title>
             </head>
-            <body></body>
+            <body>
+                <h1>HTML Rendered!</h1>
+                <div className="container">{html.children}</div>
+            </body>
         </html>
     );
 }
-
+//the className is used instead of class because class is reserved for JS
 module.exports = Default;
 
 /**this is where HTML comes into play
