@@ -6,6 +6,7 @@ const breads = express.Router();
 breads.get("/", (req, res) => {
     res.render("./views/index", {
         bread: bread,
+        title: "Index Page",
     }); //tells us to render the file with the view we give it
     // res.send(bread);
 });

@@ -3,9 +3,9 @@ const breads = require("../controllers/breads_controller");
 const Default = require("./layouts/default");
 const bread = require("../models/bread");
 
-function Index() {
+function Index({ title }) {
     return (
-        <Default>
+        <Default title={title}>
             {/*<h2>Index Page</h2> */}
             {/* <p>I have {bread[0].name} bread!</p> */}
             <ul>
