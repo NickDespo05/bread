@@ -12,8 +12,13 @@ breads.get("/", (req, res) => {
 });
 
 breads.get("/:arrayIndex", (req, res) => {
-    let index = req.params.arrayIndex;
-    res.send(bread[index]);
+    if (Breads[req.params.arrayIndex]) {
+        res.render("show", {
+            bread: Breads[req.params.arrayIndex],
+        });
+    } else {
+        res.send("404");
+    }
 }); //setting what happens when we put in the index of the array of objects in the breads.js file
 
 module.exports = breads;
