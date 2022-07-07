@@ -20,6 +20,11 @@ function Index({ title }) {
                     );
                 })}
             </ul>
+            <div className="blackButton">
+                <a href="/breads">
+                    <button>Go back to index</button>
+                </a>
+            </div>
         </Default>
     );
 }

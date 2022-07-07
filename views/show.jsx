@@ -2,7 +2,7 @@ const React = require("react");
 const bread = require("../models/bread");
 const Default = require("./layouts/default");
 
-function show([bread]) {
+function show({ bread }) {
     return (
         <Default>
             <h2>Show page</h2>

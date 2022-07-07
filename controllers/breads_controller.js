@@ -10,15 +10,32 @@ breads.get("/", (req, res) => {
     }); //tells us to render the file with the view we give it
     // res.send(bread);
 });
-
+breads.get("/new", (req, res) => {
+    res.render(`./views/new`);
+});
 breads.get("/:arrayIndex", (req, res) => {
-    if (Breads[req.params.arrayIndex]) {
-        res.render("show", {
-            bread: Breads[req.params.arrayIndex],
+    if (bread[req.params.arrayIndex]) {
+        res.render(`./views/Show`, {
+            bread: bread[req.params.arrayIndex],
         });
     } else {
         res.send("404");
     }
 }); //setting what happens when we put in the index of the array of objects in the breads.js file
+
+breads.post("/", (req, res) => {
+    console.log(req.body);
+    if (!req.body.image) {
+        req.body.image =
+            "https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80";
+    }
+    if (req.body.hasGluten === "on") {
+        req.body.hasGluten === true;
+    } else {
+        req.body.hasGluten === false;
+    }
+    bread.push(req.body);
+    res.redirect("/breads");
+});
 
 module.exports = breads;

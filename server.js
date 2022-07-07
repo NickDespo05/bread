@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+
 app.set("views", __dirname, "/views"); //telling the program where to look for the views
 app.set("view engine", "jsx"); //setting what is being used to make the view
 app.engine("jsx", require("express-react-views").createEngine());
@@ -12,6 +14,7 @@ app.get("/", (req, res) => {
 
 const breadsController = require("./controllers/breads_controller.js");
 app.use("/breads", breadsController);
+// MIDDLEWARE
 //setting the controller as the bread controller file
 
 app.use(express.static("public"));
