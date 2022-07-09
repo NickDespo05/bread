@@ -1,9 +1,11 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const methodOverride = require("method-override");
+
+app.use(methodOverride("_method"));
 
 app.use(express.urlencoded({ extended: true }));
-
 app.set("views", __dirname, "/views"); //telling the program where to look for the views
 app.set("view engine", "jsx"); //setting what is being used to make the view
 app.engine("jsx", require("express-react-views").createEngine());
@@ -23,6 +25,4 @@ app.get("*", (req, res) => {
     res.send("404");
 });
 
-app.listen(process.env.PORT, () => {
-    console.log("port is " + process.env.PORT);
-}); //sets the port and logs it in the console
+app.listen(process.env.PORT); //sets the port and logs it in the console
