@@ -45,4 +45,23 @@ breads.delete("/:indexArray", (req, res) => {
     res.status(303).redirect("/breads");
 });
 
+breads.put("/:arrayIndex", (req, res) => {
+    let i = req.params.arrayIndex;
+    if (req.body.hasGluten === "on") {
+        req.body.hasGluten = true;
+    } else {
+        req.body.hasGluten = false;
+    }
+    bread[req.params.arrayIndex] = req.body;
+    console.log(req.params.arrayIndex);
+    res.redirect(`/breads/${req.params.arrayIndex}`);
+});
+
+breads.get("/:arrayIndex/edit", (req, res) => {
+    res.render(`./views/edit`, {
+        bread: bread[req.params.arrayIndex],
+        index: req.params.arrayIndex,
+    });
+});
+
 module.exports = breads;
