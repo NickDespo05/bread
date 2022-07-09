@@ -3,7 +3,7 @@ const breads = require("../controllers/breads_controller");
 const Default = require("./layouts/default");
 const bread = require("../models/bread");
 
-function Index({ title }) {
+function Index({ bread, title }) {
     return (
         <Default title={title}>
             {/*<h2>Index Page</h2> */}

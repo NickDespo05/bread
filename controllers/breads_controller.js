@@ -13,6 +13,14 @@ breads.get("/", (req, res) => {
 breads.get("/new", (req, res) => {
     res.render(`./views/new`);
 });
+
+breads.get("/:arrayIndex/edit", (req, res) => {
+    res.render(`./views/edit`, {
+        bread: bread[req.params.arrayIndex],
+        index: req.params.arrayIndex,
+    });
+});
+
 breads.get("/:arrayIndex", (req, res) => {
     if (bread[req.params.arrayIndex]) {
         res.render(`./views/Show`, {
@@ -55,13 +63,6 @@ breads.put("/:arrayIndex", (req, res) => {
     bread[req.params.arrayIndex] = req.body;
     console.log(req.params.arrayIndex);
     res.redirect(`/breads/${req.params.arrayIndex}`);
-});
-
-breads.get("/:arrayIndex/edit", (req, res) => {
-    res.render(`./views/edit`, {
-        bread: bread[req.params.arrayIndex],
-        index: req.params.arrayIndex,
-    });
 });
 
 module.exports = breads;
