@@ -45,8 +45,6 @@ breads.get("/:id", (req, res) => {
     bread.findById(req.params.id).then((foundBreads) => {
         res.render("views/show", { bread: foundBreads });
     });
-    .catch(err=>{res.send('404')})
-    
 }); //setting what happens when we put in the index of the array of objects in the breads.js file
 
 //this is the delete method telling the program to delete a certain bread at a given index with the splice method
