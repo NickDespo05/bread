@@ -15,7 +15,7 @@ function New() {
                     type="checkbox"
                     name="hasGluten"
                     id="hasGluten"
-                    required
+                    defaultChecked
                 />
                 <br />
                 <input type="submit" />
