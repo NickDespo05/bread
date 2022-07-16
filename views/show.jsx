@@ -1,5 +1,4 @@
 const React = require("react");
-const bread = require("../models/bread");
 const Default = require("./layouts/default");
 
 function show({ bread, index }) {
@@ -13,7 +12,7 @@ function show({ bread, index }) {
                 {bread.hasGluten ? <span>does </span> : <span>does Not </span>}
                 have gluten
             </p>
-            <img src={bread.img} alt={bread.name} />
+            <img src={bread.image} alt={bread.name} />
             <li>
                 <a href="/breads">Go Home</a>
             </li>

@@ -17,6 +17,24 @@ breads.get("/", (req, res) => {
 // }); //tells us to render the file with the view we give it
 // // res.send(bread);
 
+breads.get("/new", (req, res) => {
+    res.render(`views/new`);
+});
+
+breads.get("/:id/edit", (req, res) => {
+    bread.findById(req.params.id).then((foundBread) => {
+        res.render("edit", {
+            bread: foundbread,
+        });
+    });
+});
+
+breads.get("/:id", (req, res) => {
+    bread.findById(req.params.id).then((foundBreads) => {
+        res.render("views/show", { bread: foundBreads });
+    });
+}); //setting what happens when we put in the index of the array of objects in the breads.js file
+
 breads.post("/", (req, res) => {
     if (!req.body.image) {
         req.body.image = undefined;
@@ -30,31 +48,6 @@ breads.post("/", (req, res) => {
     res.redirect("/breads");
 });
 
-breads.get("/new", (req, res) => {
-    res.render(`./views/new`);
-});
-
-breads.get("/:arrayIndex/edit", (req, res) => {
-    res.render(`./views/edit`, {
-        bread: bread[req.params.arrayIndex],
-        index: req.params.arrayIndex,
-    });
-});
-
-breads.get("/:id", (req, res) => {
-    bread.findById(req.params.id).then((foundBreads) => {
-        res.render("views/show", { bread: foundBreads });
-    });
-}); //setting what happens when we put in the index of the array of objects in the breads.js file
-
-//this is the delete method telling the program to delete a certain bread at a given index with the splice method
-breads.delete("/:id", (req, res) => {
-    bread.findByIdAndDelete(req.params.id).then((deletedBread) => {
-        //this is a function that finds an element by the unique id in the database and deletes it
-        res.status(303).redirect("/breads");
-    });
-});
-
 breads.put("/:id", (req, res) => {
     if (req.body.hasGluten === "on") {
         req.body.hasGluten = true;
@@ -64,8 +57,16 @@ breads.put("/:id", (req, res) => {
     bread
         .findByIdAndUpdate(req.params.id, req.body, { new: true })
         .then((updatedBread) => {
-            res.status(303).redirect("/breads");
+            res.redirect(`/breads/${req.params.id}`);
         });
+});
+
+//this is the delete method telling the program to delete a certain bread at a given index with the splice method
+breads.delete("/:id", (req, res) => {
+    bread.findByIdAndDelete(req.params.id).then((deletedBread) => {
+        //this is a function that finds an element by the unique id in the database and deletes it
+        res.status(303).redirect("/breads");
+    });
 });
 
 module.exports = breads;
