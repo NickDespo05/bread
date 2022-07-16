@@ -48,21 +48,24 @@ breads.get("/:id", (req, res) => {
 }); //setting what happens when we put in the index of the array of objects in the breads.js file
 
 //this is the delete method telling the program to delete a certain bread at a given index with the splice method
-breads.delete("/:indexArray", (req, res) => {
-    bread.splice(req.params.indexArray, 1);
-    res.status(303).redirect("/breads");
+breads.delete("/:id", (req, res) => {
+    bread.findByIdAndDelete(req.params.id).then((deletedBread) => {
+        //this is a function that finds an element by the unique id in the database and deletes it
+        res.status(303).redirect("/breads");
+    });
 });
 
-breads.put("/:arrayIndex", (req, res) => {
-    let i = req.params.arrayIndex;
+breads.put("/:id", (req, res) => {
     if (req.body.hasGluten === "on") {
         req.body.hasGluten = true;
     } else {
         req.body.hasGluten = false;
     }
-    bread[req.params.arrayIndex] = req.body;
-    console.log(req.params.arrayIndex);
-    res.redirect(`/breads/${req.params.arrayIndex}`);
+    bread
+        .findByIdAndUpdate(req.params.id, req.body, { new: true })
+        .then((updatedBread) => {
+            res.status(303).redirect("/breads");
+        });
 });
 
 module.exports = breads;
