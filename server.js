@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const methodOverride = require("method-override");
 const mongoose = require("mongoose");
-
 app.use(methodOverride("_method"));
 
 app.use(express.urlencoded({ extended: true }));
@@ -16,13 +15,8 @@ app.engine("jsx", require("express-react-views").createEngine());
 //     useNewURLParser: true,
 //     useUnifiedTopology: true,
 // });
-mongoose.connect(
-    process.env.MONGO_URI,
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    () => {
-        console.log("connected to mongo: ", process.env.MONGO_URI);
-    }
-);
+//prettier-ignore
+mongoose.connect(process.env.MONGO_URI,{ useNewUrlParser: true, useUnifiedTopology: true },() => {console.log("connected to mongo: ", process.env.MONGO_URI);});
 app.get("/", (req, res) => {
     res.send("Hello World (bread)");
 }); //default page

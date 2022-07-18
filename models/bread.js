@@ -28,9 +28,17 @@ const { Schema } = mongoose;
 
 const breadSchema = new Schema({
     name: { type: String, required: true },
-    hasGluten: Boolean,
+    hasGluten: { type: Boolean, requierd: false },
     image: { type: String, default: "http://placehold.it/500x500.png" },
+    baker: {
+        type: String,
+        enum: ["Rachel", "Monica", "Joey", "Chandler", "Ross", "Pheobe"],
+    },
 });
+
+breadSchema.methods.getBakedby = function () {
+    return `${this.name} was baked with pure hatrid by ${this.baker}`;
+};
 
 //makes the schema a mongoose model wich will allow us to use it to communicate with
 //mongoDB and its saved in a const so it can be exported

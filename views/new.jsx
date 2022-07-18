@@ -17,6 +17,15 @@ function New() {
                     id="hasGluten"
                     defaultChecked
                 />
+                <label htmlFor="baker">Baker</label>
+                <select name="baker" id="baker">
+                    <option value="Rachel">Rachel</option>
+                    <option value="Monica">Monica</option>
+                    <option value="Joey">Joey</option>
+                    <option value="Chandler">Chandler</option>
+                    <option value="Ross">Ross</option>
+                    <option value="Pheobe">Pheobe</option>
+                </select>
                 <br />
                 <input type="submit" />
             </form>
