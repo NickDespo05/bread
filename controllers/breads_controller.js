@@ -1,14 +1,16 @@
 const express = require("express");
 const bread = require("../models/bread"); //the require here does the same thing as
 //in the server.js file. makes it dependant/links it to this file
+const Baker = require("../models/baker.js");
 const breads = express.Router();
 
-bread.find().then((foundBreads) => {
-    breads.get("/", (req, res) => {
-        res.render("views/index", {
-            bread: foundBreads,
-            title: "Index Page",
-        });
+breads.get("/", async (req, res) => {
+    const foundBreads = await bread.find().lean();
+    const foundBakers = await Baker.find().limit(2).lean();
+    res.render("./index", {
+        bread: foundBreads,
+        title: "Index Page",
+        bakers: foundBakers,
     });
 });
 // res.render("./views/index", {
@@ -18,23 +20,37 @@ bread.find().then((foundBreads) => {
 // // res.send(bread);
 
 breads.get("/new", (req, res) => {
-    res.render(`views/new`);
+    Baker.find()
+        //prettier-ignore
+        .then((foundBakers) => {
+            res.render(`./new`, {
+                bakers: foundBakers,
+            });
+        });
 });
 
 breads.get("/:id/edit", (req, res) => {
     //prettier-ignore
-    bread.findById(req.params.id).then(foundBread => {
-        res.render("views/edit", {bread: foundBread});
+    Baker.find().then((foundBakers) => {
+        bread
+            .findById(req.params.id)
+            .then((foundBread) => {
+                res.render("./edit", {
+                    bread: foundBread,
+                    bakers: foundBakers,
+                });
+            });
     });
 });
 
 breads.get("/:id", (req, res) => {
     //prettier-ignore
-    bread.findById(req.params.id).then(foundBreads => {
-        const bakedBread = foundbread.getBakedBy();
-        console.log(bakedBread)
-        res.render("views/show", { bread: foundBreads });
-    });
+    bread
+        .findById(req.params.id)
+        .populate("baker", "name")
+        .then((foundBreads) => {
+            res.render("./show", { bread: foundBreads });
+        });
 }); //setting what happens when we put in the index of the array of objects in the breads.js file
 
 breads.post("/", (req, res) => {
